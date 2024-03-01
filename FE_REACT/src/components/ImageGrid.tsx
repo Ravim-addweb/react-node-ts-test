@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'helpers/axiosConfig';
 import Loader from './loader';
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { searchStatus } from "reduxstore/slices/searchSlice"
+
 
 interface Image {
   title: string;
@@ -21,14 +23,23 @@ const ImageGrid = (() => {
   const [images, setImages ] = useState<Image[]>([])
   const [currentPage, setCurrentPage] = useState(1);
   const [loading, setLoading] = useState(false);
-  const itemsPerPage = 10;
+  const dispatch = useDispatch()
+  const itemsPerPage = 20;
   const search = useSelector((state: any) => state.demoState)
   const fetchImages = async ()=> {
     try{
       let APIurl = ``
+      console.log(search, "search.searched")
       if(search.data){
-        APIurl = `${process.env.REACT_APP_BASIC_URL}search?tags=` + search.data + `&page=1&per_page=${itemsPerPage}`
-        setCurrentPage(1)
+        let page = 1
+        if(search.searched === true){
+          dispatch(searchStatus())
+          setImages([]);
+          setCurrentPage(1)
+        } else {
+          page = currentPage
+        }
+        APIurl = `${process.env.REACT_APP_BASIC_URL}search?tags=` + search.data + `&page=${currentPage}&per_page=${itemsPerPage}`
       } else {
         APIurl = `${process.env.REACT_APP_BASIC_URL}list?page=${currentPage}&per_page=${itemsPerPage}`
       }
@@ -37,7 +48,6 @@ const ImageGrid = (() => {
         url: APIurl
       })
       if(search.data) {
-        console.log(response.data.data, "response.data.data")
         setImages(response.data.data);
       } else {
         setImages([...images, ...response.data.data]);

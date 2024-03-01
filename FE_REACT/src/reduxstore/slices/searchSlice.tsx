@@ -2,17 +2,20 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState: any = ""
 
-export const demoSlice = createSlice({
-    name: 'demoSlice',
-    initialState: { data : initialState },
+export const demoSlice:any = createSlice({
+    name: 'searchSlice',
+    initialState: { data : initialState, searched: false },
     reducers: {
-      editItem: (state, action) => {
-        console.log(action.payload, "action.payload")
-        state.data = action.payload
+      searchText: (state, action) => {
+        state.searched = true
+        state.data = action.payload.data
+      },
+      searchStatus: (state, action) => {
+        state.searched = false
       }
     }
 })
 
-export const { editItem } = demoSlice.actions
+export const { searchText, searchStatus } = demoSlice.actions
 
 export const demoReducer = demoSlice.reducer

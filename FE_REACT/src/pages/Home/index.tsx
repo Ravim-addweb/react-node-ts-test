@@ -4,7 +4,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 
 const Home = () => {
     return (
-        <Container >
+        <Container className="mb-5">
             <Row>
                 <Col>
                     <ImageGrid/>

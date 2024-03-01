@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { toastifyError } from "helpers/toastify";
 
 axios.interceptors.request.use(
   (config: any) => {
@@ -18,6 +19,7 @@ axios.interceptors.response.use(
     return response;
   },
   (error) => {
+    toastifyError(error.response.statusText || "Internal server error!")
     return Promise.reject(error);
   }
 );

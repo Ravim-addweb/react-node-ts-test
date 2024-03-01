@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 import { useDispatch } from 'react-redux'
-import { editItem } from "reduxstore/slices/searchSlice"
+import { searchText } from "reduxstore/slices/searchSlice"
 
 function Navbar() {
     const [ searchVal, setSearchVal ] = useState("")
     const dispatch = useDispatch()
-    const submitSearch = (() => {
-        console.log(searchVal, "searchVal")
-        dispatch(editItem(searchVal))
+    const submitSearch = ((e:any) => {
+        e.preventDefault()
+        dispatch(searchText({ data: searchVal}))
     })
 
     return (
@@ -16,7 +16,7 @@ function Navbar() {
             <Container className="mt-4">
                 <Row>
                     <Col sm={6}>
-                    <Form className="d-flex">
+                    <Form className="d-flex" onSubmit={submitSearch}>
                         <Form.Control
                             value={searchVal}
                             type="search"
@@ -25,7 +25,7 @@ function Navbar() {
                             aria-label="Search"
                             onChange={(e:any) => setSearchVal(e.target.value)}
                         />
-                        <Button className="rounded-pill" variant="outline-primary" onClick={()=> submitSearch()}>Search</Button>
+                        <Button type="submit" className="rounded-pill" variant="outline-primary">Search</Button>
                     </Form>
                     </Col>
                 </Row>
