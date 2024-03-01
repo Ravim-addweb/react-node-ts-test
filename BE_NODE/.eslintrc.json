@@ -4,11 +4,31 @@
   "plugins": ["@typescript-eslint"],
   "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended"],
   "rules": {
-    // Add specific rules here if needed
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
+    "no-console": ["error", { "allow": ["warn", "error"] }],
+    "no-empty": ["error", { "allowEmptyCatch": true }],
+    "no-dupe-keys": "error",
+    "no-irregular-whitespace": "error",
+    "no-undef": "off",
+    "no-useless-catch": "error",
+    "no-var": "error",
+    "prefer-const": "error",
+    "prefer-template": "error",
+    "eqeqeq": "error",
+    "object-shorthand": "error",
+    "prefer-arrow-callback": "error",
+    "quotes": ["error", "single"],
+    "semi": ["error", "always"],
+    "no-multiple-empty-lines": ["error", { "max": 1 }],
+    "indent": ["error", 2],
+    "comma-dangle": ["error", "never"],
+    "comma-spacing": ["error", { "before": false, "after": true }],
+    "space-infix-ops": "error"
   },
   "env": {
     "node": true,
     "es2022": true
   }
 }
-  
