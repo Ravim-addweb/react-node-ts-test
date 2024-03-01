@@ -1,8 +1,15 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { demoReducer } from 'reduxstore/slices/searchSlice'
+import { searchSliceReducer } from "reduxstore/slices/searchSlice";
 
 export const store = configureStore({
-    reducer: {
-        demoState: demoReducer,
-    },
-})
+  reducer: {
+    searchState: searchSliceReducer,
+  },
+});
+
+export interface IReduxState {
+  searchState: {
+    data: string;
+    searched: boolean;
+  };
+}
