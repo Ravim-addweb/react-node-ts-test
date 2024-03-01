@@ -1,5 +1,4 @@
-import { useEffect, useState, useContext } from 'react'
-import Context from 'providers/themeProvider';
+import { useEffect, useState } from 'react'
 
 export default () => {
   const [theme, setTheme] = useState(localStorage.getItem('theme') || "light")
