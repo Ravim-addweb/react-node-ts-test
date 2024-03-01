@@ -1,15 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { searchSliceReducer } from "reduxstore/slices/searchSlice";
+import imagesReducer from '../reduxstore/slices/imagesSlice'
 
 export const store = configureStore({
-  reducer: {
-    searchState: searchSliceReducer,
-  },
+    reducer: {
+        images: imagesReducer,
+    },
 });
 
-export interface IReduxState {
-  searchState: {
-    data: string;
-    searched: boolean;
-  };
-}
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;

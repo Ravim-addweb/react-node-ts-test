@@ -2,7 +2,7 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import pages from "pages";
 
-const Router = () => {
+const Router: React.FC = () => {
   const pageRoutes = pages.map(
     ({
       path,

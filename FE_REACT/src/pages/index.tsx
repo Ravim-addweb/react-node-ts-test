@@ -5,13 +5,8 @@ const pagesData = [
   {
     path: "",
     element: <Home />,
-    title: "home"
-  // },
-  // {
-  //   path: "about",
-  //   element: <About />,
-  //   title: "about"
-  }
+    title: "home",
+  },
 ];
 
 export default pagesData;

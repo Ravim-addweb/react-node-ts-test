@@ -80,22 +80,10 @@ http://localhost:5000/api/v1
 - Description: Fetch data from Flickr.
 - Endpoint: `/list`
 - Query Parameters:
+  - `tags` (string): The tags to search for. (optional)
   - `page` (integer): The page number of results to retrieve (default: 1).
-  - `per_page` (integer): The number of results per page (default: 10).
+  - `per_page` (integer): The number of results per page (default: 20).
 - Example: 
   ```http
   GET http://localhost:5000/api/v1/list?page=1&per_page=20
-  ```
-
-#### GET /search
-
-- Description: Search for images on Flickr based on tags.
-- Endpoint: `/search`
-- Query Parameters:
-  - `tags` (string): The tags to search for.
-  - `page` (integer): The page number of results to retrieve (default: 1).
-  - `per_page` (integer): The number of results per page (default: 10).
-- Example: 
-  ```http
-  GET http://localhost:5000/api/v1/search?tags=landscape&page=1&per_page=20
   ```
