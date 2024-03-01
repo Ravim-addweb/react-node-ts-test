@@ -6,7 +6,7 @@ const Home = () => {
     return (
         <Container >
             <Row>
-                <Col className="d-flex flex-wrap justify-content-between">
+                <Col>
                     <ImageGrid/>
                 </Col>
             </Row>

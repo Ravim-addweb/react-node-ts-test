@@ -22,20 +22,23 @@ const ImageGrid = (() => {
   const [currentPage, setCurrentPage] = useState(1);
   const [loading, setLoading] = useState(false);
   const itemsPerPage = 10;
-  useEffect((()=> {
-    setLoading(true);
-    fetchImages()
-  }), [currentPage])
   const search = useSelector((state: any) => state.demoState)
   const fetchImages = async ()=> {
     try{
+      let APIurl = ``
+      if(search.data){
+        APIurl = `${process.env.REACT_APP_BASIC_URL}search?tags=` + search.data + `&page=1&per_page=${itemsPerPage}`
+        setCurrentPage(1)
+      } else {
+        APIurl = `${process.env.REACT_APP_BASIC_URL}list?page=${currentPage}&per_page=${itemsPerPage}`
+      }
       const response = await axios({
         method: "GET",
-        url: `${process.env.REACT_APP_BASIC_URL}${search.data ? `search?tags=` + search.data + `page=${currentPage}&per_page=${itemsPerPage}` : "list?page=${currentPage}&per_page=${itemsPerPage}"}`
+        url: APIurl
       })
       if(search.data) {
-        setImages([...response.data.data]);
-        currentPage
+        console.log(response.data.data, "response.data.data")
+        setImages(response.data.data);
       } else {
         setImages([...images, ...response.data.data]);
       }
@@ -45,6 +48,10 @@ const ImageGrid = (() => {
       setLoading(false); // Set loading state to false after fetching data
     }
   }
+  useEffect((()=> {
+    setLoading(true);
+    fetchImages()
+  }), [currentPage, search.data])
   const handleScroll = () => {
     const scrollY = window.scrollY;
     const windowHeight = window.innerHeight;
@@ -61,17 +68,16 @@ const ImageGrid = (() => {
   }, [currentPage]);
   return (
     <>
-    {loading && <Loader/>}
-    {<Loader/>}
+      <div className='d-flex flex-wrap justify-content-between'>
       {images.map((image: any, index: number) => {
         return (
-            <div key={index} style={{ height: '200px' }} className='w-auto mt-2'>
-              <img src={image.media.m} className="img-fluid" style={{ objectFit: 'cover', maxHeight: '100%', height: "100%" }} />
-            </div>
+          <div key={index} style={{ height: '200px' }} className='w-auto mt-2'>
+            <img src={image.media.m} className="img-fluid" style={{ objectFit: 'cover', maxHeight: '100%', height: "100%" }} />
+          </div>
         )
       })}
-      
-      
+      </div>
+      {loading && <Loader/>}
     </>
   )
 })
