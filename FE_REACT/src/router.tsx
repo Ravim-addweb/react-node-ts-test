@@ -1,8 +1,9 @@
+import React,{ FC } from "react";
 import { Route, Routes } from "react-router-dom";
 import pages from "pages";
 
 const Router = () => {
-  const pageRoutes = pages.map(({ path, title, element }: { path: any; title: any; element: any }) => {
+  const pageRoutes = pages.map(({ path, title, element }: { path: string; title: string; element: JSX.Element }) => {
     return <Route key={title} path={`/${path}`} element={element} />;
   });
 

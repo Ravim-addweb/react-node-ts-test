@@ -1,15 +1,13 @@
-// import "styles/home.scss";
-import toastify from "helpers/toastify";
+import React from "react";
 import ImageGrid from "components/ImageGrid";
-import { Form, FormControl, Button, Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
 
 const Home = () => {
     return (
-        <Container>
+        <Container >
             <Row>
-                <Col sm={12}>
+                <Col className="d-flex flex-wrap justify-content-between">
                     <ImageGrid/>
-                    {/* <h1 onClick={() => toastify("Hello coders!")} className="heading">React snippet</h1> */}
                 </Col>
             </Row>
         </Container>
